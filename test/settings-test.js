@@ -101,6 +101,7 @@ describe('Settings Bill Widget', function() {
     assert.equal(settings.totalBill3(),3.50);
     assert.equal(settings.reachedCriticalLevel(),true);
 
+    //when a user changes the Critical level then it should update
     settings.setCriticalLevel(10);
 
     settings.bill3('call');
