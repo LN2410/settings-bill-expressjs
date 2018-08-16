@@ -114,7 +114,17 @@ module.exports = function SettingsBillFunc() {
     }
     return temp;
   }
+  function reset() {
+    callCost = 0;
+     smsCost = 0;
+     warningLevel = 0;
+     criticalLevel = 0;
+     stampMap = [];
+     callCostTotal = 0;
+     smsCostTotal = 0;
+     totalCostThree = 0;
 
+  }
   return {
     setCallCost,
     setSmsCost,
@@ -132,6 +142,7 @@ module.exports = function SettingsBillFunc() {
     getCritical,
     storeTime,
     getStamp,
-    filter
+    filter,
+    reset
   }
 };

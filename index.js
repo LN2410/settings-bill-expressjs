@@ -16,16 +16,16 @@ app.use(bodyParser.json())
 
 app.get('/', function(req,res){
 	//getting the costs
-	let callCost = settingsBill.getCall();
-	let smsCost = settingsBill.getSms();
-	let warningLevel = settingsBill.getWarning();
-	let criticalLevel = settingsBill.getCritical();
+ 	callCost = settingsBill.getCall();
+ 	smsCost = settingsBill.getSms();
+ 	warningLevel = settingsBill.getWarning();
+ 	criticalLevel = settingsBill.getCritical();
 	// getting the totals
-	let grandTotal = settingsBill.totalBill3();
-	let callTotal = settingsBill.callBill3();
-	let smsTotal = settingsBill.smsBill3();
+ 	grandTotal = settingsBill.totalBill3();
+ 	callTotal = settingsBill.callBill3();
+ 	smsTotal = settingsBill.smsBill3();
 
-	let colour ='';
+ 	colour ='';
 
 	if (grandTotal >= criticalLevel) {
 		colour = "danger"
@@ -72,6 +72,7 @@ app.post('/action', function(req,res){
 	res.redirect('/');
 });
 
+
 app.get('/actions', function(req,res){
 	res.render('actions',{stampAction: settingsBill.getStamp()} )
 
@@ -81,6 +82,40 @@ app.get('/actions/:type', function(req,res){
 	let temporary = req.params.type;
 	 settingsBill.getStamp()
 	res.render('actions', {stampAction: settingsBill.filter(temporary)})
+});
+
+app.post('/', function(req, res){
+	settingsBill.reset();
+	//getting the costs
+ 	callCost = settingsBill.getCall();
+ 	smsCost = settingsBill.getSms();
+ 	warningLevel = settingsBill.getWarning();
+ 	criticalLevel = settingsBill.getCritical();
+	// getting the totals
+ 	grandTotal = settingsBill.totalBill3();
+ 	callTotal = settingsBill.callBill3();
+ 	smsTotal = settingsBill.smsBill3();
+
+ 	colour ='';
+
+	if (grandTotal >= criticalLevel) {
+		colour = "danger"
+	}
+	else if (grandTotal >= warningLevel) {
+		colour = "warning"
+	}
+
+	res.render('index', {
+		// settings: settingsBill
+		grandTotal,
+		callTotal,
+		smsTotal,
+		callCost,
+		smsCost,
+		warningLevel,
+		criticalLevel,
+		colour
+	});
 });
 
 const PORT = process.env.PORT || 3011;
