@@ -6,7 +6,7 @@ module.exports = function SettingsBillFunc() {
   var warningLevel = 0;
   var criticalLevel = 0;
   var stampMap = [];
-  
+
   // create a variables that will keep track of all three totals.
   var callCostTotal = 0;
   var smsCostTotal = 0;
@@ -28,7 +28,7 @@ module.exports = function SettingsBillFunc() {
   }
 
   function getCall3() {
-    return callCostTotal
+    return callCostTotal.toFixed(2)
   }
 
   function getCall(){
@@ -36,7 +36,7 @@ module.exports = function SettingsBillFunc() {
   }
 
   function getSms3() {
-    return smsCostTotal
+    return smsCostTotal.toFixed(2)
   }
 
   function getSms(){
@@ -52,7 +52,7 @@ module.exports = function SettingsBillFunc() {
   }
 
   function getTotal3() {
-    return totalCostThree
+    return totalCostThree.toFixed(2)
   }
   function getStamp() {
     for (var i = 0; i < stampMap.length; i++) {
@@ -90,7 +90,7 @@ module.exports = function SettingsBillFunc() {
       stampMap.unshift(
         {
           type: "call",
-          price: callCostTotal,
+          price: getCall(),
           time: d
         }
       )
@@ -99,7 +99,7 @@ module.exports = function SettingsBillFunc() {
       stampMap.unshift(
         {
           type: "sms",
-          price: smsCostTotal,
+          price: getSms(),
           time: d
         }
       )
